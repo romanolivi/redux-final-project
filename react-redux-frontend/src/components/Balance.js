@@ -1,9 +1,20 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const Balance = () => {
+const Balance = (props) => {
     return (
-        <div>Balance</div>
+        <div>
+            <header>Welcome to your Balance page</header>
+            <p>{props.username}'s balance: ${props.balance} </p>  
+        </div>
     )
 }
+  
+const mapStateToProps = state => {
+    return {
+        username: state.username,
+        balance: state.balance
+    }
+}
 
-export default Balance;
+export default connect(mapStateToProps)(Balance);

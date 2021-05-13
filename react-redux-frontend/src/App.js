@@ -19,7 +19,7 @@ const App = (props, {history= defaultHistory}) => {
       <Route exact path={'/'} component={Start} />
       <Route exact path={'/signup'} component={SignUp} />
       <Route exact path={'/login'} component={LogIn} />
-      <AuthenticatedRoute exact path={'/dashboard'} component={Dashboard} />
+      <Route exact path={'/dashboard'} component={Dashboard} />
       <AuthenticatedRoute exact path={'/goal-form'} component={GoalForm} />
       <AuthenticatedRoute exact path={'/balance'} component={Balance} />
     </div>
