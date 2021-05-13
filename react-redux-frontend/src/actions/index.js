@@ -7,7 +7,12 @@ export const logIn = (userData) => dispatch => {
 }
 
 export const changeBalance = (amount) => dispatch => {
-    dispatch({type: 'CHANGE_BALANCE', balance: amount})
+    dispatch({type: 'CHANGE_UP', balance: amount.balance})
 }
+
+export const addGoal = (goal) => dispatch => {
+    dispatch({type: 'ADD_GOAL', goals: goal.goals})
+}
+
   
 

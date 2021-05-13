@@ -7,6 +7,7 @@ const initialState = {
 }
 
 export default (state = initialState, action ) => {
+    let goal;
     switch(action.type) {
         case 'LOG_IN':
             return {...state, username: action.username, password: action.password, balance: action.balance, loggedIn: true}
@@ -16,6 +17,16 @@ export default (state = initialState, action ) => {
 
         case 'CHANGE_UP':
             return {...state, balance: action.balance}
+
+        case 'ADD_GOAL': 
+            // goal = {
+            //     id: uuid(),
+            //     name: action.name,
+            //     content: action.content, 
+            //     price: action.price
+            // };
+            console.log(action.goal)
+            return {...state, goals: [...state.goals, action.goals]}
 
         default:   
             return state;

@@ -5,7 +5,7 @@ import { Route, Redirect } from 'react-router-dom';
 class AuthenticatedRoute extends Component {
 
     render(props) {
-        if (this.props.loggedIn) {
+        if (this.props.loggedIn === true) {
             return <Route {...this.props} />
         } else {
             return <Redirect to={'/'} />

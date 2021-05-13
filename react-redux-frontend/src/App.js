@@ -20,8 +20,8 @@ const App = (props, {history= defaultHistory}) => {
       <Route exact path={'/signup'} component={SignUp} />
       <Route exact path={'/login'} component={LogIn} />
       <Route exact path={'/dashboard'} component={Dashboard} />
-      <AuthenticatedRoute exact path={'/goal-form'} component={GoalForm} />
-      <AuthenticatedRoute exact path={'/balance'} component={Balance} />
+      <Route exact path={'/goal-form'} component={GoalForm} />
+      <Route exact path={'/balance'} component={Balance} />
     </div>
   </Router>
   )
