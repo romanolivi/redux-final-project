@@ -8,7 +8,7 @@ import thunk from 'redux-thunk'
 import manageStoreData from './reducers/manageStoreData';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(manageGameData, composeEnhancers(applyMiddleware(thunk)))
+const store = createStore(manageStoreData, composeEnhancers(applyMiddleware(thunk)))
 
 ReactDOM.render(
   <Provider store={store}>
