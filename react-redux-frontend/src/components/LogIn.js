@@ -2,11 +2,16 @@ import React from 'react';
 import { Formik, Field, Form } from 'formik';
 import { connect } from 'react-redux';
 import { logIn } from '../actions/index';
+import UserDataService from '../api/UserDataService';
 
 
 const LogIn = props => {
 
     const handleSubmit = (values) => {
+        const user = {
+            username: values.username,
+        }
+        UserDataService.logUser(user);
         props.logIn(values);
         props.history.push('/dashboard')
     }
@@ -14,16 +19,11 @@ const LogIn = props => {
 
     return (
         <div>
-            <Formik initialValues={{username: '', password: ''}} onSubmit={(values) => handleSubmit(values)}>
+            <Formik initialValues={{username: ''}} onSubmit={(values) => handleSubmit(values)}>
                 <Form>
                     <fieldset className="form-group">
                         <label>Username</label>
                         <Field type="text" className="form-control" name="username" />
-                    </fieldset>
-
-                    <fieldset className="form-group">
-                        <label>Password</label>
-                        <Field type="text" className="form-control" name="password" />
                     </fieldset>
 
                     <button type="submit">Submit</button>

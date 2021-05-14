@@ -1,8 +1,10 @@
+import uuid from 'uuid';
+
 const initialState = {
     loggedIn: false,
+    id: '',
     username: '',
-    password: '',
-    balance: null,
+    balance: 20,
     goals: []
 }
 
@@ -10,21 +12,18 @@ export default (state = initialState, action ) => {
     let goal;
     switch(action.type) {
         case 'LOG_IN':
-            return {...state, username: action.username, password: action.password, balance: action.balance, loggedIn: true}
+            return {...state, username: action.username, balance: action.balance, loggedIn: true}
 
         case 'SIGN_UP':
-            return {...state, loggedIn: true, username: action.username, password: action.password, balance: action.balance}
+            return {...state, loggedIn: true, username: action.username, balance: action.balance, id: action.id}
 
-        case 'CHANGE_UP':
-            return {...state, balance: action.balance}
+        case 'ADD_BALANCE':
+            return {...state, balance: state.balance += parseInt(action.payload)}
+
+        case 'SUBTRACT_BALANCE':
+            return {...state, balance: state.balance -= parseInt(action.payload)}    
 
         case 'ADD_GOAL': 
-            // goal = {
-            //     id: uuid(),
-            //     name: action.name,
-            //     content: action.content, 
-            //     price: action.price
-            // };
             console.log(action.goal)
             return {...state, goals: [...state.goals, action.goals]}
 

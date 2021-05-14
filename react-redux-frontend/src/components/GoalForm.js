@@ -15,11 +15,13 @@ const GoalForm = (props) => {
             <header>Welcome, {props.username}</header>
             <p>Balance: {props.balance}</p>
             <p>Enter your new goal below</p>
-            <Formik initialValues={ {goals: props.goals}} onSubmit={(goal) => handleSubmit(goal)}>
+            <Formik initialValues={ {goals: ''}} onSubmit={(goal) => handleSubmit(goal)}>
                 <Form>
                     <fieldset className="form-group">
                         <label>New Goal:</label>
-                        <Field type="text" name="goals" className="form-control" /> 
+                        <Field type="text" name="goals" className="form-control" />
+
+                        <label></label> 
                     </fieldset>
                     
                     <button type="submit">Submit</button>

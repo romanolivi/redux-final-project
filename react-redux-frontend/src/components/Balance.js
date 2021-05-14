@@ -1,32 +1,45 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Formik, Field, Form } from 'formik';
-import { changeBalance } from '../actions/index';
+import { addBalance, subtractBalance } from '../actions/index';
 
-const Balance = (props) => {
+class Balance extends Component {
 
-    const handleSubmit = (amount) => {
-        props.changeBalance(amount);
-        props.history.push('/dashboard');
-    } 
+    state = {
+        amount: 0
+    };
 
-    return (
+    addToBalance = () => {
+        this.props.addBalance(this.state.amount)
+    }
+
+    subtractFromBalance = (event) => {
+        this.props.subtractBalance(this.state.amount)
+    }
+
+    handleChange = event => {
+        this.setState({
+           [event.target.name]: event.target.value
+        })
+    }
+
+    render() {
+        return (
         <div>
             <header>Welcome to your Balance page</header>
-            <p>{props.username}'s balance: ${props.balance} </p>
+            <p>{this.props.username}'s balance: ${this.props.balance} </p>
             <p>Enter your new balance:</p>  
-            <Formik initialValues={ {balance: props.balance}} onSubmit={(amount) => handleSubmit(amount)}>
-                <Form>
-                    <fieldset className="form-group">
-                        <label>New Balance:</label>
-                        <Field type="integer" name="balance" className="form-control" /> 
-                    </fieldset>
-                    
-                    <button type="submit">Submit</button>
-                </Form>
-            </Formik>
+            <form>
+                <label>Add or subtract</label>
+                <input type="number" name="amount" onChange={(event) => this.handleChange(event)} />
+
+                <button type="button" className="btn btn-success" onClick={this.addToBalance}>Add</button>
+
+                <button type="button" className="btn btn-danger" onClick={(event) => this.subtractFromBalance(event)}>Subtract</button>
+            </form>            
         </div>
-    )
+        )
+    }
 }
   
 const mapStateToProps = state => {
@@ -36,4 +49,28 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { changeBalance })(Balance);
+export default connect(mapStateToProps, { addBalance, subtractBalance })(Balance);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// <Formik initialValues={ {balance: null}} onSubmit={(amount) => handleSubmit(amount)}>
+//                 <Form>
+//                     <fieldset className="form-group">
+//                         <label>ADD OR SUBTRACT:</label>
+//                         <Field type="integer" name="balance" className="form-control" /> 
+//                     </fieldset>
+                    
+//                     <button type="submit">Submit</button>
+//                 </Form>
+//             </Formik>
