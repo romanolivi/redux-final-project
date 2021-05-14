@@ -2,7 +2,7 @@ import React from 'react';
 import { Formik, Field, Form } from 'formik';
 import { connect } from 'react-redux';
 import { logIn } from '../actions/index';
-import UserDataService from '../api/UserDataService';
+// import UserDataService from '../api/UserDataService';
 
 
 const LogIn = props => {
@@ -20,6 +20,9 @@ const LogIn = props => {
                     <fieldset className="form-group">
                         <label>Username</label>
                         <Field type="text" className="form-control" name="username" />
+
+                        <label>Pass Key</label>
+                        <Field type="text" className="form-control" name="id" />
                     </fieldset>
 
                     <button type="submit">Submit</button>
@@ -28,5 +31,6 @@ const LogIn = props => {
         </div>
     )  
 }
+
 
 export default connect(null, { logIn })(LogIn);

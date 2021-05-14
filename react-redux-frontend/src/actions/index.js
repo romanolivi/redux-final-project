@@ -2,20 +2,27 @@ import axios from 'axios';
 
 export const signUp = (userData) => dispatch => {
     axios.post('http://localhost:3000/users', userData)
-        .then((resp) => dispatch({type: 'SIGN_UP', username: resp.data.attributes.username, balance: resp.data.attributes.balance, id: resp.data.attributes.id}))
+    .then((resp) => console.log(resp.data))    
+    // .then((resp) => dispatch({type: 'SIGN_UP', username: resp.data.username, balance: resp.data.balance, id: resp.data.id}))
 }
 
 export const logIn = (userData) => dispatch => {
-    axios.get('http://localhost:3000/users', userData)
-    .then((resp) => dispatch({type: 'LOG_IN', username: resp.data.data[0].attributes.username, balance: resp.data.data[0].attributes.balance, goals: resp.data.data[0].relationships.goals.data, id: resp.data.data[0].id}))
+    console.log(userData)
+    console.log(userData.id)
+    axios.get(`http://localhost:3000/users/${userData.id}`, userData)
+    // .then((resp) => console.log(resp))
+    .then((resp) => dispatch({type: 'LOG_IN', username: resp.data.username, balance: resp.data.balance, id: resp.data.id}))
 }
 
 export const addBalance = (amount) => dispatch => {
-    dispatch({type: 'ADD_BALANCE', payload: amount})
+    axios.patch('http://localhost:3000/users', amount)
+        .then((resp) => console.log(resp.data))
+        // .then((resp) => dispatch({type: 'ADD_BALANCE', payload: resp.data.attributes.balance}))
 }
 
 export const subtractBalance  = (amount) => dispatch => {
-    dispatch({type: 'SUBTRACT_BALANCE', payload: amount})
+    axios.patch('http://localhost:3000/users', amount)
+    .then((resp) => dispatch({type: 'SUBTRACT_BALANCE', payload: resp.data.balance}))
 }
 
 export const addGoal = (goal) => dispatch => {
