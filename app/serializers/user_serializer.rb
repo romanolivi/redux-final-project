@@ -1,5 +1,5 @@
-class UserSerializer
-  include FastJsonapi::ObjectSerializer
-  attributes :username :goals
-  has_many :goals
-end
+# class UserSerializer
+#   include FastJsonapi::ObjectSerializer
+#   attributes :username, :balance
+#   has_many :goals
+# end

@@ -1,27 +1,28 @@
+require 'pry'
+
 class UsersController < ApplicationController
     def index 
         users = User.all
-        options = {
-            include: [:goals]
-        }
-        render json: UserSerializer.new(users, options)
+        render json: users.to_json(:include => {
+            :goals => {:only => [:name, :price]}
+        }, :except => [:created_at, :updated_at])
     end
-
+ 
     def show 
         user = User.find_by(id: params[:id])
-        options = {
-            include: [:goals]
-        }
-        render json: UserSerializer.new(users, options)
+        render json: user.to_json(:include => {
+            :goals => {:only => [:name, :price]}
+        }, :except => [:created_at, :updated_at])
     end
 
     def create
-        user = User.new(user_params)
+        user = User.create(user_params)
         if user.save 
-            render json: user, except: [:created_at, updated_at]
+            render json: user, except: [:created_at, :updated_at]
         else 
             render json: { message: 'User Creation Failure'}
         end
+        # binding.pry
     end
 
     def update 
@@ -43,6 +44,6 @@ class UsersController < ApplicationController
     private 
 
     def user_params
-        params.require(:user).permit(:username, :password)
+        params.require(:user).permit(:username, :balance)
     end
 end
