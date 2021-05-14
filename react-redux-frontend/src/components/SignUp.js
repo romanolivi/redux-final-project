@@ -2,16 +2,18 @@ import React from 'react';
 import {Formik, Field, Form} from 'formik';
 import { connect } from 'react-redux';
 import { signUp } from '../actions/index';
-import UserDataService from '../api/UserDataService';
 
 const SignUp = (props) => {
     
 
     const handleSubmit = (values) => {
-        props.signUp(values);     
+        const userData = {
+            username: values.username,
+            balance: values.balance
+        }
+        props.signUp(userData);     
         props.history.push('/dashboard');
     }
-
 
     return (
         <div>

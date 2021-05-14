@@ -8,10 +8,6 @@ import UserDataService from '../api/UserDataService';
 const LogIn = props => {
 
     const handleSubmit = (values) => {
-        const user = {
-            username: values.username,
-        }
-        UserDataService.logUser(user);
         props.logIn(values);
         props.history.push('/dashboard')
     }

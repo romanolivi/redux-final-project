@@ -1,5 +1,3 @@
-import uuid from 'uuid';
-
 const initialState = {
     loggedIn: false,
     id: '',
@@ -12,7 +10,7 @@ export default (state = initialState, action ) => {
     let goal;
     switch(action.type) {
         case 'LOG_IN':
-            return {...state, username: action.username, balance: action.balance, loggedIn: true}
+            return {...state, username: action.username, balance: action.balance, id: action.id, loggedIn: true}
 
         case 'SIGN_UP':
             return {...state, loggedIn: true, username: action.username, balance: action.balance, id: action.id}

@@ -1,16 +1,19 @@
-import axios from 'axios';
-import { connect } from 'react-redux';
+// import axios from 'axios';
+// import { connect } from 'react-redux';
 
-class UserDataService {
+// class UserDataService {
     
-    // createUser = (user) => {
-    //     return axios.post('http://localhost:3000/users', user)
-    //                 .then((data) => addID(data.id))
-    // }
+//     // createUser = (user) => {
+//     //     return axios.post('http://localhost:3000/users', user)
+//     //                 .then((data) => addID(data.id))
+//     // }
 
-    logUser = (user) => {
-        return axios.get('http://localhost:3000/users', user)
-    }
-}
+//     // logUser = (username) => {
+//     //     return axios.get(`http://localhost:3000/users/`)
+//     //                 .then((resp) => dispatch)
+//     // }
+// }
 
-export default new UserDataService();
+// // .find(data => data.username === username))
+
+// export default new UserDataService();
