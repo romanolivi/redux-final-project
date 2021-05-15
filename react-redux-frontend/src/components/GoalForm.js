@@ -5,7 +5,12 @@ import { addGoal } from '../actions/index';
 
 const GoalForm = (props) => {
 
-    const handleSubmit = (goal) => {
+    const handleSubmit = (values) => {
+        const goal = {
+            name: values.name,
+            price: parseInt(values.price),
+            user_id: props.id
+        }
         props.addGoal(goal);
         props.history.push('/dashboard');
     } 
@@ -15,13 +20,14 @@ const GoalForm = (props) => {
             <header>Welcome, {props.username}</header>
             <p>Balance: {props.balance}</p>
             <p>Enter your new goal below</p>
-            <Formik initialValues={ {goals: ''}} onSubmit={(goal) => handleSubmit(goal)}>
+            <Formik initialValues={ {name: '', price: ''}} onSubmit={(values) => handleSubmit(values)}>
                 <Form>
                     <fieldset className="form-group">
                         <label>New Goal:</label>
-                        <Field type="text" name="goals" className="form-control" />
+                        <Field type="text" name="name" className="form-control" />
 
-                        <label></label> 
+                        <label>Goal Price:</label> 
+                        <Field type="number" name="price" className="form-control" />
                     </fieldset>
                     
                     <button type="submit">Submit</button>
@@ -31,12 +37,8 @@ const GoalForm = (props) => {
     )
 }
   
-const mapStateToProps = state => {
-    return {
-        username: state.username,
-        balance: state.balance,
-        goals: state.goals
-    }
+const mapStateToProps = ({username, balance, goals, id}) => {
+    return { username, balance, goals, id }
 }
 
 export default connect(mapStateToProps, { addGoal })(GoalForm);

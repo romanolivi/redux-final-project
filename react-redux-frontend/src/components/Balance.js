@@ -10,11 +10,19 @@ class Balance extends Component {
     };
 
     addToBalance = () => {
-        this.props.addBalance(this.state.amount)
+        const values = {
+            balance: parseInt(this.props.balance) + parseInt(this.state.amount),
+            id: this.props.id
+        }
+        this.props.addBalance(values)
     }
 
-    subtractFromBalance = (event) => {
-        this.props.subtractBalance(this.state.amount)
+    subtractFromBalance = () => {
+        const values = {
+            balance: parseInt(this.props.balance) - parseInt(this.state.amount),
+            id: this.props.id
+        }
+        this.props.subtractBalance(values)
     }
 
     handleChange = event => {
@@ -35,7 +43,7 @@ class Balance extends Component {
 
                 <button type="button" className="btn btn-success" onClick={this.addToBalance}>Add</button>
 
-                <button type="button" className="btn btn-danger" onClick={(event) => this.subtractFromBalance(event)}>Subtract</button>
+                <button type="button" className="btn btn-danger" onClick={this.subtractFromBalance}>Subtract</button>
             </form>            
         </div>
         )
@@ -45,7 +53,8 @@ class Balance extends Component {
 const mapStateToProps = state => {
     return {
         username: state.username,
-        balance: state.balance
+        balance: state.balance,
+        id: state.id
     }
 }
 

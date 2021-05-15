@@ -2,7 +2,7 @@ const initialState = {
     loggedIn: false,
     id: '',
     username: '',
-    balance: 20,
+    balance: 0,
     goals: []
 }
 
@@ -16,10 +16,10 @@ export default (state = initialState, action ) => {
             return {...state, loggedIn: true, username: action.username, balance: action.balance, id: action.id}
 
         case 'ADD_BALANCE':
-            return {...state, balance: state.balance += parseInt(action.payload)}
+            return {...state, balance: parseInt(action.payload)}
 
         case 'SUBTRACT_BALANCE':
-            return {...state, balance: state.balance -= parseInt(action.payload)}    
+            return {...state, balance: parseInt(action.payload)}    
 
         case 'ADD_GOAL': 
             console.log(action.goal)
