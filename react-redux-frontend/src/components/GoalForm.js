@@ -9,7 +9,8 @@ const GoalForm = (props) => {
         const goal = {
             name: values.name,
             price: parseInt(values.price),
-            user_id: props.id
+            user_id: props.id,
+            completed: false
         }
         props.addGoal(goal);
         props.history.push('/dashboard');

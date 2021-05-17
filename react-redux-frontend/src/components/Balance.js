@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Formik, Field, Form } from 'formik';
 import { addBalance, subtractBalance } from '../actions/index';
 
 class Balance extends Component {

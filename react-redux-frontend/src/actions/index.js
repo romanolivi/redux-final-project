@@ -8,8 +8,8 @@ export const signUp = (userData) => dispatch => {
 
 export const logIn = (userData) => dispatch => {
     axios.get(`http://localhost:3000/users/${userData.id}`, userData)
-    // .then((resp) => console.log(resp))
-    .then((resp) => dispatch({type: 'LOG_IN', username: resp.data.username, balance: resp.data.balance, id: resp.data.id}))
+    // .then((resp) => console.log(resp.data.goals))
+    .then((resp) => dispatch({type: 'LOG_IN', username: resp.data.username, balance: resp.data.balance, id: resp.data.id, goals: resp.data.goals}))
 }
 
 export const addBalance = (values) => dispatch => {
@@ -27,9 +27,20 @@ export const subtractBalance  = (values) => dispatch => {
 export const addGoal = (goal) => dispatch => {
     axios.post('http://localhost:3000/goals', goal)
         // .then((resp) => console.log(resp.data))
-        .then((resp) => dispatch({type: 'ADD_GOAL', goals: resp.data.name}))
+        .then((resp) => dispatch({type: 'ADD_GOAL', goals: resp.data}))
+} 
+
+export const deleteGoal = (goal) => dispatch => {
+    axios.delete(`http://localhost:3000/goals/${goal.id}`, goal)
+    // .then((resp) => console.log(resp.data.id))
+    .then(() => dispatch({type: 'DELETE_GOAL', goal}))
 }
 
+export const completeGoal = (goal) => dispatch => {
+    axios.put(`http://localhost:3000/goals/${goal.id}`, goal)
+        // .then((resp) => console.log(resp.data))
+        .then((resp) => dispatch({type: 'COMPLETE_GOAL', goal: resp.data}))
+}
 
 
   

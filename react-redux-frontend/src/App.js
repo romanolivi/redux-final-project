@@ -9,6 +9,7 @@ import GoalForm  from './components/GoalForm';
 import Dashboard  from './components/Dashboard';
 import Balance  from './components/Balance';
 import AuthenticatedRoute from './components/authentication/AuthenticatedRoute';
+import CompletedGoals from './components/CompletedGoals';
 
 const defaultHistory = createBrowserHistory();
 
@@ -22,6 +23,7 @@ const App = (props, {history= defaultHistory}) => {
       <Route exact path={'/dashboard'} component={Dashboard} />
       <Route exact path={'/goal-form'} component={GoalForm} />
       <Route exact path={'/balance'} component={Balance} />
+      <Route exact path={'/completed-goals'} component={CompletedGoals} />
     </div>
   </Router>
   )
