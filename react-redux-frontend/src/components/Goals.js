@@ -15,7 +15,7 @@ class Goals extends Component {
    
     
     render() {
-
+        console.log(this.props.history)
         let incompleteGoals = this.props.goals.filter(goal => goal.completed === false);
         
         let goalList = incompleteGoals.map(goal => {
@@ -34,7 +34,7 @@ class Goals extends Component {
             return (
                 <ol>
                     {goalList}
-                    <PayForm />
+                    <PayForm history={this.props.history}/>
                 </ol>
             )
         };

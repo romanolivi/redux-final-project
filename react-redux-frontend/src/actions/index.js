@@ -8,7 +8,7 @@ export const signUp = (userData) => dispatch => {
 
 export const logIn = (userData) => dispatch => {
     axios.get(`http://localhost:3000/users/${userData.id}`, userData)
-    // .then((resp) => console.log(resp.data.goals))
+    // .then((resp) => console.log(resp.data))
     .then((resp) => dispatch({type: 'LOG_IN', username: resp.data.username, balance: resp.data.balance, id: resp.data.id, goals: resp.data.goals}))
 }
 
@@ -18,8 +18,8 @@ export const addBalance = (values) => dispatch => {
         .then((resp) => dispatch({type: 'ADD_BALANCE', payload: resp.data.balance}))
 }
 
-export const subtractBalance  = (values) => dispatch => {
-    axios.put(`http://localhost:3000/users/${values.id}`, values)
+export const subtractBalance  = (values) => async dispatch => {
+    await axios.put(`http://localhost:3000/users/${values.id}`, values)
         // .then((resp) => console.log(resp.data.balance))
         .then((resp) => dispatch({type: 'SUBTRACT_BALANCE', payload: resp.data.balance}))
 }
@@ -36,8 +36,8 @@ export const deleteGoal = (goal) => dispatch => {
     .then(() => dispatch({type: 'DELETE_GOAL', goal}))
 }
 
-export const payGoal = (goalValues, id, goalIndex) => dispatch => {
-    axios.put(`http://localhost:3000/goals/${id}`, goalValues)
+export const payGoal = (goalValues, goalIndex) => async dispatch => {
+    await axios.put(`http://localhost:3000/goals/${goalValues.id}`, goalValues)
         // .then((resp) => console.log(resp.data))
         .then((resp) => dispatch({type: 'PAY_GOAL', payload: goalValues.paid, id: goalIndex, completed: goalValues.completed}))
 }

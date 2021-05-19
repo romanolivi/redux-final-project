@@ -13,6 +13,7 @@ import CompletedGoals from './components/CompletedGoals';
 import Goals from './components/Goals';
 // import GoalsContainer from './containers/GoalsContainer';
 import Goal from './components/Goal';
+import Failure from './components/Failure';
 
 
 
@@ -32,6 +33,7 @@ const App = (props, {history= defaultHistory}) => {
       <Route exact path={'/completed-goals'} component={CompletedGoals} />
       <Route exact path={'/goals'} component={Goals} />
       <Route exact path={'/goal/:id'} component={Goal} />
+      <Route exact path={'/failure'} component={Failure} />
      </div>
   </Router>
   )

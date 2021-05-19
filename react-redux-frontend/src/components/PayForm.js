@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { payGoal, subtractBalance } from '../actions/index';
 
 
@@ -22,28 +23,37 @@ const PayForm = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         let x = goal
-        let userIndex = props.goals.findIndex(g => g.name === goal);
         let findGoal = props.goals.find(g => (g.name === x));
         let goalIndex = props.goals.findIndex(g => g.name === goal)
+
+        if(!findGoal) {
+           return props.history.push('/failure')
+        }
 
         let updatePaidAmount = parseInt(amount) + parseInt(findGoal.paid);
         let completedGoal = findGoal.price <= updatePaidAmount ? true : false
         let values = {
             balance: parseInt(props.balance) - parseInt(amount),
             id: props.id
-        }
-        let goalValues = {
-            paid: updatePaidAmount,
-            completed: completedGoal
+        } 
+
+        if(values.balance > parseInt(amount)) {
+            props.subtractBalance(values);
+            let goalValues = {
+                paid: updatePaidAmount,
+                completed: completedGoal,
+                id: findGoal.id
+            }
+            props.payGoal(goalValues, goalIndex);
+        } else if (values.balance < parseInt(amount)) {
+            props.history.push('/failure')
         }
 
-        console.log(goalIndex)
-        console.log(findGoal.id)
-        console.log(goalValues)
-        console.log(values)
 
-        props.subtractBalance(values);
-        props.payGoal(goalValues, findGoal.id, goalIndex);
+
+        // console.log(goalIndex)
+        // console.log(findGoal.id)
+        // console.log(values)
     }
 
 
@@ -61,7 +71,11 @@ const PayForm = (props) => {
                 <input type='text' name="amount" onChange={(event) => handleAmountChange(event)} />
                 <button type="submit">button</button>
             </form>
+
+            <Link to={'/dashboard'}>Dashboard</Link>
         </div>
+
+    
     )
 }
 
