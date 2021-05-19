@@ -1,3 +1,5 @@
+import update from 'react-addons-update';
+
 const initialState = {
     loggedIn: false,
     id: '',
@@ -27,10 +29,25 @@ export default (state = initialState, action ) => {
         case 'DELETE_GOAL':
             return {...state, goals: state.goals.filter(goal => goal.id !== action.goal.id)}
 
-        case 'COMPLETE_GOAL': 
-            return {...state, goals: action.goal.completed = true};
+        case 'PAY_GOAL':
+            return update(state, {
+                goals: {
+                    [action.id]: {
+                        paid: {$set: action.payload},
+                        completed: {$set: action.completed}
+                    }
+                }
+            })
+
+        // case 'VIEW_GOAL': 
+        //     return {...state, goals: [...state.goals]}
 
         default:   
             return state;
     }
 }
+
+
+// case 'COMPLETE_GOAL': 
+        //     action.goal.completed = true;
+        //     return {...state, goals: [...state.goals]};

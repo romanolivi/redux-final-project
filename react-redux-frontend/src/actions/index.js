@@ -36,11 +36,17 @@ export const deleteGoal = (goal) => dispatch => {
     .then(() => dispatch({type: 'DELETE_GOAL', goal}))
 }
 
-export const completeGoal = (goal) => dispatch => {
-    axios.put(`http://localhost:3000/goals/${goal.id}`, goal)
+export const payGoal = (goalValues, id, goalIndex) => dispatch => {
+    axios.put(`http://localhost:3000/goals/${id}`, goalValues)
         // .then((resp) => console.log(resp.data))
-        .then((resp) => dispatch({type: 'COMPLETE_GOAL', goal: resp.data}))
+        .then((resp) => dispatch({type: 'PAY_GOAL', payload: goalValues.paid, id: goalIndex, completed: goalValues.completed}))
 }
+
+// export const viewGoal = (goal) => dispatch => {
+//     axios.get(`http://localhost:3000/goals/${goal.id}`, goal)
+//     // .then((resp) => console.log(resp.data))
+//     .then((resp) => dispatch({type: 'VIEW_GOAL', goal: resp.data}))
+// }
 
 
   

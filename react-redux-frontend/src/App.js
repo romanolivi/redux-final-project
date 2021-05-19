@@ -10,6 +10,12 @@ import Dashboard  from './components/Dashboard';
 import Balance  from './components/Balance';
 import AuthenticatedRoute from './components/authentication/AuthenticatedRoute';
 import CompletedGoals from './components/CompletedGoals';
+import Goals from './components/Goals';
+// import GoalsContainer from './containers/GoalsContainer';
+import Goal from './components/Goal';
+
+
+
 
 const defaultHistory = createBrowserHistory();
 
@@ -17,14 +23,16 @@ const App = (props, {history= defaultHistory}) => {
   return ( 
   <Router history={history} >
     <div>
-      <Route exact path={'/'} component={Start} />
+      <Route exact path={'/'} component={Start} /> 
       <Route exact path={'/signup'} component={SignUp} />
       <Route exact path={'/login'} component={LogIn} />
       <Route exact path={'/dashboard'} component={Dashboard} />
       <Route exact path={'/goal-form'} component={GoalForm} />
       <Route exact path={'/balance'} component={Balance} />
       <Route exact path={'/completed-goals'} component={CompletedGoals} />
-    </div>
+      <Route exact path={'/goals'} component={Goals} />
+      <Route exact path={'/goal/:id'} component={Goal} />
+     </div>
   </Router>
   )
 }

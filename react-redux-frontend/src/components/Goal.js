@@ -1,42 +1,39 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from 'react-redux';
-import { deleteGoal, subtractBalance, completeGoal } from '../actions/index';
+import { deleteGoal, subtractBalance} from '../actions/index';
 
+const Goal = (props) => {
 
-class Goal extends Component {
-
-    handleDelete = () => {
-        this.props.deleteGoal(this.props.goal);
+    const handleDelete = () => {
+        props.deleteGoal(props.goals);
+        props.history.push('/dashboard');
     }
 
-    handleComplete = () => {
-        this.props.goal.completed = true;
+    const handleComplete = () => {
+        props.goal.completed = true;
         const values = {
-            balance: parseInt(this.props.balance) - parseInt(this.props.goal.price),
-            id: this.props.id
+            balance: parseInt(props.balance) - parseInt(props.goals.price),
+            id: props.id
         }
-        this.props.subtractBalance(values);
-        this.props.completeGoal(this.props.goal);
-        console.log(this.props.goals)
+        props.subtractBalance(values);
+        props.completeGoal(props.goals);
+        props.history.push('/dashboard');
     }
 
-    
-    render() {
-        const { goal } = this.props
-    
         return (
             <div>
                 <li>
-                    {goal.name} - Price: {goal.price}
-                    <button onClick={this.handleDelete}> X </button>
-                    <button onClick={this.handleComplete} className="btn btn-success">Complete Goal</button>
+                    {console.log(props.goals.filter(goal => goal.id === props.match.params.id))}
+                    {props.goals.name} - Price: {props.goals.price} - Amount Left to Complete: {props.goals.paid}
+                    <button onClick={handleDelete}> X </button>
+                    <button onClick={handleComplete} className="btn btn-success">Complete Goal</button>
                 </li>
             </div>
         )
         
     
     }
-}
+
 
 const mapStateToProps = state => {
     return {
@@ -48,4 +45,4 @@ const mapStateToProps = state => {
 
 
 
-export default connect(mapStateToProps, ( { deleteGoal, subtractBalance, completeGoal }))(Goal);
+export default connect(mapStateToProps, ( { deleteGoal, subtractBalance }))(Goal);

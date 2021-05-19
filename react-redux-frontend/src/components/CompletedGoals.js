@@ -12,7 +12,7 @@ const CompletedGoals = (props) => {
             <ol>
             {completeGoals.map(goal => 
                 <li key={goal.id}>
-                    {goal.name}
+                    {goal.name} - Price: ${goal.price}
                 </li>)}
                 </ol>
         </div>

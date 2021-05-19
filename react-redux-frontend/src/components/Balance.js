@@ -14,6 +14,7 @@ class Balance extends Component {
             id: this.props.id
         }
         this.props.addBalance(values)
+        console.log(this.props.id)
     }
 
     subtractFromBalance = () => {
