@@ -4,14 +4,14 @@ class UsersController < ApplicationController
     def index 
         users = User.all
         render json: users.to_json(:include => {
-            :goals => {:only => [:name, :price]}
+            :goals => {:only => [:id, :name, :price, :paid, :completed, :user_id]}
         }, :except => [:created_at, :updated_at])
     end
  
     def show 
         user = User.find_by(id: params[:id])
         render json: user.to_json(:include => {
-            :goals => {:only => [:name, :price]}
+            :goals => {:only => [:id, :name, :price, :paid, :completed, :user_id]}
         }, :except => [:created_at, :updated_at])
     end
 
@@ -28,18 +28,13 @@ class UsersController < ApplicationController
     def update 
         user = User.find(params[:id])
         if user 
-            goal = Goal.find_or_create_by(:goal => params[:_json], :user_id => params[:id])
+            user.update(user_params)
+            user.save
         end
-        render json: goal
+        render json: user
+        # binding.pry
     end
 
-    def destroy 
-        user = User.find(params[:id])
-        if user 
-            Goal.delete(user.goals.find{|img| img.image == params[:_json] }.id)
-        end
-        render json: goal
-    end
 
     private 
 

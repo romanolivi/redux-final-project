@@ -15,6 +15,8 @@ ActiveRecord::Schema.define(version: 2021_05_12_213516) do
   create_table "goals", force: :cascade do |t|
     t.string "name"
     t.integer "price"
+    t.integer "paid"
+    t.boolean "completed"
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
