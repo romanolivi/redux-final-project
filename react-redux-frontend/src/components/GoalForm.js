@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Formik, Field, Form } from 'formik';
 import { addGoal } from '../actions/index';
+import NumberFormat from 'react-number-format';
+
 
 const GoalForm = (props) => {
 
@@ -13,14 +15,18 @@ const GoalForm = (props) => {
             completed: false,
             paid: 0
         }
-        props.addGoal(goal);
-        props.history.push('/dashboard');
+        if (!goal.name || !goal.price) {
+            props.history.push('/failure')
+        } else {
+            props.addGoal(goal);
+            props.history.push('/dashboard');
+        }
     } 
 
     return (
         <div>
             <header>Welcome, {props.username}</header>
-            <p>Balance: {props.balance}</p>
+            <p>Balance: <NumberFormat value={props.balance} displayType={'text'} thousandSeparator={true} prefix={'$'} /></p>
             <p>Enter your new goal below</p>
             <Formik initialValues={ {name: '', price: ''}} onSubmit={(values) => handleSubmit(values)}>
                 <Form>

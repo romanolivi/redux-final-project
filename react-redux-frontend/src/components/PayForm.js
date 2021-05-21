@@ -23,37 +23,39 @@ const PayForm = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         let x = goal
-        let findGoal = props.goals.find(g => (g.name === x));
-        let goalIndex = props.goals.findIndex(g => g.name === goal)
 
-        if(!findGoal) {
-           return props.history.push('/failure')
-        }
+        if (!goal || !amount) {
+            return props.history.push('/failure');
+        } 
+
+        let findGoal = props.goals.find(g => (g.name === x));
+        console.log(findGoal)
+        let goalIndex = props.goals.findIndex(g => g.name === goal)
 
         let updatePaidAmount = parseInt(amount) + parseInt(findGoal.paid);
         let completedGoal = findGoal.price <= updatePaidAmount ? true : false
         let values = {
             balance: parseInt(props.balance) - parseInt(amount),
-            id: props.id
-        } 
+            id: props.id,
+            goals: findGoal
 
-        if(values.balance > parseInt(amount)) {
-            props.subtractBalance(values);
-            let goalValues = {
-                paid: updatePaidAmount,
-                completed: completedGoal,
-                id: findGoal.id
-            }
-            props.payGoal(goalValues, goalIndex);
-        } else if (values.balance < parseInt(amount)) {
+        }
+        
+
+        let goalValues = {
+            paid: updatePaidAmount,
+            completed: completedGoal,
+        }
+        
+        if (props.balance > parseInt(amount)){
+            props.payGoal(goalValues, findGoal.id, goalIndex, values);    
+        } else {
             props.history.push('/failure')
         }
-
-
-
-        // console.log(goalIndex)
-        // console.log(findGoal.id)
-        // console.log(values)
+        
+    
+        event.target.reset()
+        // setAmount('5')
     }
 
 
@@ -72,10 +74,7 @@ const PayForm = (props) => {
                 <button type="submit">button</button>
             </form>
 
-            <Link to={'/dashboard'}>Dashboard</Link>
         </div>
-
-    
     )
 }
 

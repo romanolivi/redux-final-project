@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addBalance, subtractBalance } from '../actions/index';
+import NumberFormat from 'react-number-format';
+
 
 class Balance extends Component {
 
@@ -35,7 +37,7 @@ class Balance extends Component {
         return (
         <div>
             <header>Welcome to your Balance page</header>
-            <p>{this.props.username}'s balance: ${this.props.balance} </p>
+            <p>{this.props.username}'s balance: Balance: <NumberFormat value={this.props.balance} displayType={'text'} thousandSeparator={true} prefix={'$'} /> </p>
             <p>Enter your new balance:</p>  
             <form>
                 <label>Add or subtract</label>

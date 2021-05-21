@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import NumberFormat from 'react-number-format';
 
 
 const CompletedGoals = (props) => {
@@ -12,7 +13,7 @@ const CompletedGoals = (props) => {
             <ol>
             {completeGoals.map(goal => 
                 <li key={goal.id}>
-                    {goal.name} - Price: ${goal.price}
+                    {goal.name} - Price: <NumberFormat value={goal.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />
                 </li>)}
                 </ol>
         </div>

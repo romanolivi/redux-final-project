@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { deleteGoal, subtractBalance} from '../actions/index';
 import { connect } from 'react-redux';
 import PayForm from './PayForm';
+import NumberFormat from 'react-number-format';
+
 
 
 
@@ -15,7 +17,6 @@ class Goals extends Component {
    
     
     render() {
-        console.log(this.props.history)
         let incompleteGoals = this.props.goals.filter(goal => goal.completed === false);
         
         let goalList = incompleteGoals.map(goal => {
@@ -33,6 +34,7 @@ class Goals extends Component {
 
             return (
                 <ol>
+                    <header>Balance: <NumberFormat value={this.props.balance} displayType={'text'} thousandSeparator={true} prefix={'$'} /></header>
                     {goalList}
                     <PayForm history={this.props.history}/>
                 </ol>
