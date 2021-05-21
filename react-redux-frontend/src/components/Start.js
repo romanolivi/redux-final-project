@@ -4,11 +4,12 @@ import {Link} from 'react-router-dom';
 const Start = () => {
     return (
         <div>
-            <Link to={'/login'}>
+            <h1 className="title">Redux Final Project</h1>
+            <Link className="login-btn" to={'/login'}>
                 Login
             </Link>
 
-            <Link to={'/signup'}>
+            <Link className="signup-btn" to={'/signup'}>
                 Signup
             </Link>
         </div>
