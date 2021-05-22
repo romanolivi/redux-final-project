@@ -5,13 +5,7 @@ const Start = () => {
     return (
         <div>
             <h1 className="title">Redux Final Project</h1>
-            <Link className="login-btn" to={'/login'}>
-                Login
-            </Link>
-
-            <Link className="signup-btn" to={'/signup'}>
-                Signup
-            </Link>
+            
         </div>
     )
 }

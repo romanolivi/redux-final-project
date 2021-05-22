@@ -1,6 +1,6 @@
 import React from 'react';
 import './bootstrap.css';
-import { BrowserRouter as Router, NavLink, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Link, NavLink, Route} from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import Start from './components/Start';
 import SignUp  from './components/SignUp';
@@ -27,8 +27,26 @@ const App = (props, {history= defaultHistory}) => {
   const [isOpen, setIsOpen] = useState(false);
   const loggedIn = props.loggedIn
   return ( 
+    
   <Router history={history} >
     <div className="fixed-layout">
+      <div className="signin">
+        <nav className="navbar navbar-expand-lg navbar-light fixed-top">
+          <div className="container">
+            <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+              <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                  {!loggedIn && <Link className="nav-link" to={"/login"}>Log in</Link>}
+                </li>
+                <li className="nav-item">
+                  {!loggedIn && <Link className="nav-link" to={"/signup"}>Sign up</Link>}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+
       <header>
         <Navbar expand="md" className="navbar">
           {loggedIn && <NavbarBrand tag={NavLink} to="/dashboard">
@@ -55,7 +73,7 @@ const App = (props, {history= defaultHistory}) => {
           </Collapse>
         </Navbar>
       </header>
-      <div>
+      <div className>
         <Route exact path={'/'} component={Start} /> 
         <Route exact path={'/signup'} component={SignUp} />
         <Route exact path={'/login'} component={LogIn} />

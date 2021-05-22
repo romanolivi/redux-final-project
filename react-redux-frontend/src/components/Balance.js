@@ -78,26 +78,28 @@ class Balance extends Component {
         return (
         
         
-<div className="card">
-<header>Welcome to your Balance page</header>
-    <p>{this.props.username}'s balance:<NumberFormat value={this.props.balance} displayType={'text'} thousandSeparator={true} prefix={'$'} /> </p>
+<div className="outer">
+    <div className="inner">
+    <header>Welcome to your Balance page</header>
+    <p>{this.props.username}'s balance: <NumberFormat value={this.props.balance} displayType={'text'} thousandSeparator={true} prefix={'$'} /> </p>
     
     
     <p>Enter your new balance:</p>  
     <form>
-        <div className="row-3">
-            <label className="col-3">Add or subtract</label>
-            <div className="col-3">
-                <input type="number" autoComplete="off" className={this.hasError("amount") ? "form-control is-invalid" : "form-control"} name="amount" onChange={(event) => this.handleChange(event)} />
+        <div>
+            <label className="balance-label">Add or subtract</label>
+            <div>
+                <input type="number" id="balance-input" autoComplete="off" className={this.hasError("amount") ? "form-control is-invalid" : "form-control"} name="amount" onChange={(event) => this.handleChange(event)} />
             </div>
             <div className={this.hasError("amount") ? "inline-errormsg" : "hidden"}>
                 Please enter a value
             </div>
-            <button type="button" className="btn btn-success padd-top" onClick={this.addToBalance}>Add</button>
+            <button type="button" id="add" className="btn btn-success" onClick={this.addToBalance}>Add</button>
 
-            <button type="button" className="btn btn-danger padd-top" onClick={this.subtractFromBalance}>Subtract</button>
+            <button type="button" id="subtract" className="btn btn-danger" onClick={this.subtractFromBalance}>Subtract</button>
         </div>
-    </form>            
+    </form>  
+    </div>          
 </div>
         )
     }

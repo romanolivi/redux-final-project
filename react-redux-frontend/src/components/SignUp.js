@@ -16,7 +16,8 @@ const SignUp = (props) => {
     }
 
     return (
-        <div>
+        <div className="outer">
+            <div className="inner">
             <Formik initialValues={{username: '', balance: null}} onSubmit={(values) => handleSubmit(values)}>
                 <Form>
                     <fieldset className="form-group">
@@ -32,6 +33,7 @@ const SignUp = (props) => {
                     <button type="submit">Submit</button>
                 </Form>
             </Formik>
+            </div>
         </div>
     )
 
