@@ -70,20 +70,24 @@ const PayForm = (props) => {
 
 
     return (
-        <div>
-            <h1>Pay Form</h1>
-            <form onSubmit={(event) => handleSubmit(event)}>
-                <select className="form-select" onChange={(event) => handleGoalChange(event)}>
-                    <option value='none' />
-                    {incompleteGoals.map((goal, idx) => 
-                    <option key={idx} value={goal.name} name={goal.name}>{goal.name}</option>)}
-                </select>
-                
-                <label>Amount you wish to contribute:</label>
-                <input type='text' name="amount" onChange={(event) => handleAmountChange(event)} />
-                <button type="submit">button</button>
-            </form>
+        <div className="outer-form">
+            <div className="inner-form">
+                <div className="pay-form">
+                    <h1>Pay Form</h1>
+                    <form onSubmit={(event) => handleSubmit(event)}>
+                        <select className="form-select" id="pay-goal" onChange={(event) => handleGoalChange(event)}>
+                            <option value='none' />
+                            {incompleteGoals.map((goal, idx) => 
+                            <option key={idx} value={goal.name} name={goal.name}>{goal.name}</option>)}
+                        </select>
+                        
+                        <label>Amount you wish to contribute:</label>
+                        <input type='text' name="amount" id="pay-goal"onChange={(event) => handleAmountChange(event)} />
+                        <button type="submit" id="pay-goal" class="btn btn-primary">Pay</button>
+                    </form>
 
+                </div>
+            </div>
         </div>
     )
 }

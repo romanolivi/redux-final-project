@@ -54,6 +54,8 @@ class SignUp extends Component {
         return (
             <div className="outer">
                 <div className="inner">
+                <h5 id="welcome-message">Welcome to Goal Monster</h5>
+                <h6 id="welcome-message-2">Create and keep track of your goals</h6>
                     <form onSubmit={(event) => this.handleSubmit(event)}>
                         <div>
                             <label>Username:</label>

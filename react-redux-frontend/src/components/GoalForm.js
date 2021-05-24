@@ -32,7 +32,7 @@ class GoalForm extends Component {
             errors.push("name")
         } 
         
-        if (!this.state.price) {
+        if (!this.state.price || this.state.price < 0) {
             errors.push("price")
         }
 
@@ -83,10 +83,10 @@ class GoalForm extends Component {
                         <input type="number" autoComplete="off" id="new-price" className={this.hasError("price") ? "form-control is-invalid" : "form-control"} name="price" onChange={(event) => this.handleChange(event)} />
                     </div>
                     <div className={this.hasError("price") ? "inline-errormsg" : "hidden"}>
-                        Goal must have a price
+                        Goal must have a positive price
                     </div>
 
-                    <button type="submit">Submit</button>
+                    <button type="submit" id="new-price">Submit</button>
                 </div>
             </form>
             </div>

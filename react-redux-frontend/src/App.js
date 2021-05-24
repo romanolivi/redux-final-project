@@ -50,7 +50,7 @@ const App = (props, {history= defaultHistory}) => {
       <header>
         <Navbar expand="md" className="navbar">
           {loggedIn && <NavbarBrand tag={NavLink} to="/dashboard">
-            <strong>Redux Final Project</strong>
+            <strong>Goal Monster</strong>
           </NavbarBrand>}
           <NavbarToggler onClick={() => setIsOpen(!isOpen)}>
             <i className="fas fa-bars" />
@@ -74,7 +74,7 @@ const App = (props, {history= defaultHistory}) => {
         </Navbar>
       </header>
       <div className>
-        <Route exact path={'/'} component={Start} /> 
+        <Route exact path={'/'} component={LogIn} /> 
         <Route exact path={'/signup'} component={SignUp} />
         <Route exact path={'/login'} component={LogIn} />
         <Route exact path={'/dashboard'} component={Dashboard} />
