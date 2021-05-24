@@ -125,3 +125,7 @@ body, html, .App, #root, .outer {
 #new-price {
   margin-bottom: 10px;
 }
+
+#login {
+  margin-top: 10px;
+}

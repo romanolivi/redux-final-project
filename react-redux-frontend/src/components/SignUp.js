@@ -1,41 +1,83 @@
 import React from 'react';
-import {Formik, Field, Form} from 'formik';
 import { connect } from 'react-redux';
 import { signUp } from '../actions/index';
+import { Component } from 'react';
 
-const SignUp = (props) => {
+class SignUp extends Component {
     
-
-    const handleSubmit = (values) => {
-        const userData = {
-            username: values.username,
-            balance: values.balance
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: '',
+            balance: 0,
+            errors: []
         }
-        props.signUp(userData);     
-        props.history.push('/dashboard');
     }
 
-    return (
-        <div className="outer">
-            <div className="inner">
-            <Formik initialValues={{username: '', balance: null}} onSubmit={(values) => handleSubmit(values)}>
-                <Form>
-                    <fieldset className="form-group">
-                        <label>Username</label>
-                        <Field type="text" className="form-control" name="username" />
-                    </fieldset>
+    handleChange = event => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
 
-                    <fieldset className="form-group">
-                        <label>Balance</label>
-                        <Field type="text" className="form-control" name="balance" />
-                    </fieldset>
+    handleSubmit = (event) => {
+        event.preventDefault();
+        let errors = [];
 
-                    <button type="submit">Submit</button>
-                </Form>
-            </Formik>
+        if(!this.state.username) {
+            errors.push("username")
+        }
+
+        this.setState({
+            errors: errors
+        })
+
+        if(errors.length > 0) {
+            event.preventDefault();
+            return false 
+        }
+
+        const userData = {
+            username: this.state.username,
+            balance: this.state.balance
+        }
+        this.props.signUp(userData);     
+        this.props.history.push('/dashboard');
+    }
+
+    hasError(error) {
+        return this.state.errors.indexOf(error) !== -1
+    }
+
+
+    render() {
+        return (
+            <div className="outer">
+                <div className="inner">
+                    <form onSubmit={(event) => this.handleSubmit(event)}>
+                        <div>
+                            <label>Username:</label>
+                            <div>
+                                <input type="text" autoComplete="off" className={this.hasError("username") ? "form-control is-invalid" : "form-control"} name="username" onChange={(event) => this.handleChange(event)} />
+                            </div>
+                            <div className={this.hasError("username") ? "inline-errormsg" : "hidden"}>
+                                Must enter a username
+                            </div>
+
+                            <label>Balance:</label>
+                            <div>
+                                <input type="text" autoComplete="off" className={this.hasError("balance") ? "form-control is-invalid" : "form-control"} name="balance" onChange={(event) => this.handleChange(event)} />
+                            </div>
+                            <div className={this.hasError("balance") ? "inline-errormsg" : "hidden"}>
+                                Must enter a balance
+                            </div>
+
+                            <button type="submit" id="login" className="btn btn-primary">Sign Up</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
-    )
+        )}
 
 }
 

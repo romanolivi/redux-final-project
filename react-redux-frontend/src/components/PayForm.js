@@ -29,7 +29,7 @@ const PayForm = (props) => {
         } 
 
         let findGoal = props.goals.find(g => (g.name === x));
-        console.log(findGoal)
+        // console.log(findGoal)
         let goalIndex = props.goals.findIndex(g => g.name === goal)
 
         let updatePaidAmount = parseInt(amount) + parseInt(findGoal.paid);
@@ -46,16 +46,26 @@ const PayForm = (props) => {
             paid: updatePaidAmount,
             completed: completedGoal,
         }
-        
-        if (props.balance > parseInt(amount)){
+
+        if (parseInt(amount) > parseInt(findGoal.price)|| parseInt(amount) > props.balance) {
+            props.history.push('failure');
+        } else if (parseInt(amount) > (parseInt(findGoal.price) - parseInt(findGoal.paid))) { 
+            console.log(parseInt(amount) > (parseInt(findGoal.price) - parseInt(findGoal.paid)));
+            values.balance = parseInt(props.balance) - ((parseInt(findGoal.price) - parseInt(findGoal.paid)))
+            goalValues.paid = parseInt(findGoal.price);
+            goalValues.completed = true;
+            console.log(goalValues)
+            props.payGoal(goalValues, findGoal.id, goalIndex, values)
+        } else if (props.balance > parseInt(amount)) {
+            console.log("hey")
             props.payGoal(goalValues, findGoal.id, goalIndex, values);    
         } else {
             props.history.push('/failure')
         }
         
-    
+        
+        console.log(findGoal.price - findGoal.paid)        
         event.target.reset()
-        // setAmount('5')
     }
 
 

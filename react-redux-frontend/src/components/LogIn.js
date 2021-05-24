@@ -1,67 +1,74 @@
 import React from 'react';
-import { Formik, Field, Form } from 'formik';
 import { connect } from 'react-redux';
 import { logIn } from '../actions/index';
+import { Component } from 'react';
 
 
-const LogIn = props => {
+class LogIn extends Component {
 
-    const handleSubmit = (values) => {
-        props.logIn(values);
-        props.history.push('/dashboard')
+    constructor(props) {
+        super(props)
+        this.state = {
+            username: '',
+            errors: []
+        }
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange = event => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        let errors = [];
+
+        if(!this.state.username) {
+            errors.push("username")
+        }
+
+        this.setState({
+            errors: errors
+        })
+
+        if(errors.length > 0) {
+            event.preventDefault();
+            return false 
+        }
+
+        this.props.logIn(this.state.username);
+        this.props.history.push('/dashboard')
+    }
+
+    hasError(error) {
+        return this.state.errors.indexOf(error) !== -1
     }
 
 
-    return (
-//         <div className="row my-4">
-//              <form>
 
-// <h3>Log in</h3>
+    render() {
+        return (
+            <div className="outer">
+                <div className="inner">    
+                    <form onSubmit={(event) => this.handleSubmit(event)}>
+                        <div>
+                        <label>Username:</label>
+                        <div>
+                            <input type="text" autoComplete="off" className={this.hasError("username") ? "form-control is-invalid" : "form-control"} name="username" onChange={(event) => this.handleChange(event)} />
+                        </div>
+                        <div className={this.hasError("username") ? "inline-errormsg" : "hidden"}>
+                            Must enter a username
+                        </div>
 
-// <div className="form-group">
-//     <label>Email</label>
-//     <input type="email" className="form-control" placeholder="Enter email" />
-// </div>
-
-// <div className="form-group">
-//     <label>Password</label>
-//     <input type="password" className="form-control" placeholder="Enter password" />
-// </div>
-
-// <div className="form-group">
-//     <div className="custom-control custom-checkbox">
-//         <input type="checkbox" className="custom-control-input" id="customCheck1" />
-//         <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
-//     </div>
-// </div>
-
-// <button type="submit" className="btn btn-dark btn-lg btn-block">Sign in</button>
-// <p className="forgot-password text-right">
-//     Forgot <a href="#">password?</a>
-// </p>
-// </form>
-            
-            
-            
-            
-        <div className="outer">
-            <div className="inner">    
-                <Formik initialValues={{username: ''}} onSubmit={(values) => handleSubmit(values)}>
-                        <Form>
-                            <fieldset className="form-group">
-                                <label className="">Username</label>
-                                <Field type="text" className="form-control" name="username" />
-
-                                <label>Pass Key</label>
-                                <Field type="text" className="form-control" name="id" />
-                            </fieldset>
-
-                            <button type="submit">Submit</button>
-                        </Form>
-                    </Formik> 
+                        <button type="submit" id="login" className="btn btn-primary">Log In</button>
+                    </div>
+                    </form>
+                </div>
             </div>
-        </div>
-    )  
+    )}  
 }
 
 

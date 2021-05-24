@@ -39,9 +39,6 @@ export default (state = initialState, action ) => {
                 }
             })
 
-        // case 'VIEW_GOAL': 
-        //     return {...state, goals: [...state.goals]}
-
         default:   
             return state;
     }

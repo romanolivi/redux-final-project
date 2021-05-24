@@ -42,11 +42,13 @@ const Dashboard = (props) => {
 
     
     function showGoalPaid(i) {
-        if (goalsCard[i]) {
+        if (goalsCard[i] && goalsCard[i].completed) {
+            return goalsCard[i].price
+        } else if (goalsCard[i]) {
             return goalsCard[i].paid
         } else {
             return '-'
-        };
+        }
     };
 
     

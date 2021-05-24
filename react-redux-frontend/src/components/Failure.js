@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const Failure = (props) => {
 
     return (
-        <div>
+        <div className="card">
             <h1>Something went wrong with your submission.</h1>
             <h3>You either overpaid for the goal or didn't have enough money in your account.</h3>
             <p><Link to={'./goals'}>Click here</Link> to go to the goal page.</p>
