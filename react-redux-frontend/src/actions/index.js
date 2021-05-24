@@ -9,6 +9,7 @@ export const logIn = (userData) => dispatch => {
     axios.get(`http://localhost:3000/users`)
     .then((resp) => resp.data.find(data => data.username === userData))
     .then((resp) => dispatch({type: 'LOG_IN', username: resp.username, balance: resp.balance, id: resp.id, goals: resp.goals}))
+    .catch(error => { console.log('No such user')})
 }
 
 export const addBalance = (values) => dispatch => {

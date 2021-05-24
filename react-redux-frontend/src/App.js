@@ -6,6 +6,7 @@ import Start from './components/Start';
 import SignUp  from './components/SignUp';
 import Failure from './components/Failure';
 import LogIn  from './components/LogIn';
+import FailedLogin from './components/FailedLogin';
 import GoalForm  from './components/GoalForm';
 import Dashboard  from './components/Dashboard';
 import Balance  from './components/Balance';
@@ -77,13 +78,14 @@ const App = (props, {history= defaultHistory}) => {
         <Route exact path={'/'} component={LogIn} /> 
         <Route exact path={'/signup'} component={SignUp} />
         <Route exact path={'/login'} component={LogIn} />
-        <Route exact path={'/dashboard'} component={Dashboard} />
+        <AuthenticatedRoute exact path={'/dashboard'} component={Dashboard} />
         <Route exact path={'/goal-form'} component={GoalForm} />
         <Route exact path={'/balance'} component={Balance} />
         <Route exact path={'/completed-goals'} component={CompletedGoals} />
         <Route exact path={'/goals'} component={Goals} />
         <Route exact path={'/goal/:id'} component={Goal} />
         <Route exact path={'/failure'} component={Failure} />
+        <Route exact path={'/failure'} component={FailedLogin} />
       </div>
 
      </div>
