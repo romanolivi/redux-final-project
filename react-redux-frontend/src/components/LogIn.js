@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { logIn } from '../actions/index';
 import { Component } from 'react';
-// import axios from 'axios';
 
 
 

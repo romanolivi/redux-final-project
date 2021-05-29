@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { Formik, Field, Form } from 'formik';
 import { addGoal } from '../actions/index';
 import NumberFormat from 'react-number-format';
 

@@ -1,4 +1,6 @@
 import React from 'react'
+import sytled from 'styled-components';
+
 
 
 const FailedLogin = (props) => {
