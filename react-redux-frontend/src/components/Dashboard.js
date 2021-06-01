@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Goal from './Goal';
 import NumberFormat from 'react-number-format';
 import { deleteGoal } from '../actions/index';
 
@@ -8,12 +7,9 @@ const Dashboard = (props) => {
 
     const completedGoals = props.goals.filter(goal => goal.completed === true)
     const goalsCard = props.goals
-    console.log(goalsCard[props.goals.length - 1]);
     function paidSum() {
         return props.goals.reduce((a, b) => a + (b.paid || 0), 0);
     } 
-
-    console.log(goalsCard)
 
     function validate(item) {
         if (item === true) {
@@ -69,7 +65,7 @@ const Dashboard = (props) => {
                         <h5 class="card-header">Total Goals</h5>
                         <div class="card-body">
                             <h5 class="card-title">{props.goals.length}</h5>
-                            <p class="card-text text-success">{Math.round((completedGoals.length/props.goals.length)*100)}% of goals completed</p>
+                            {completedGoals.length > 0 ? <p class="card-text text-success">{Math.round((completedGoals.length/props.goals.length)*100)}% of goals completed</p> : <p className="card-text text-danger">No goals completed</p>}
                         </div>
                         </div>
                 </div>
@@ -78,7 +74,7 @@ const Dashboard = (props) => {
                         <h5 class="card-header">Goals Completed</h5>
                         <div class="card-body">
                             <h5 class="card-title">{completedGoals.length}</h5>
-                            <p class="card-text text-success">{Math.round((completedGoals.length/props.goals.length)*100)}% of goals completed</p>
+                            {completedGoals.length > 0 ? <p class="card-text text-success">{Math.round((completedGoals.length/props.goals.length)*100)}% of goals completed</p> : <p className="card-text text-danger">No goals completed</p>}
                         </div>
                         </div>
                 </div>
@@ -148,7 +144,6 @@ const Dashboard = (props) => {
                                     </tbody>
                                     </table>
                             </div>
-                                <a href="#" class="btn btn-block btn-light">View all</a>
                         </div>
                     </div>
                 </div>

@@ -44,11 +44,3 @@ const mapStateToProps = state => {
 }
 export default connect(mapStateToProps)(CompletedGoals);
 
-
-// <p>Completed Goals:</p>
-//             <ol>
-//             {completeGoals.map(goal => 
-//                 <li key={goal.id}>
-//                     {goal.name} - Price: <NumberFormat value={goal.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />
-//                 </li>)}
-//                 </ol>

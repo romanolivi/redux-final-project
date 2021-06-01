@@ -167,3 +167,9 @@ body, html, .App, #root, .outer {
   font-family:Verdana, Geneva, Tahoma, sans-serif;
   text-align: center;
 }
+
+#delete-goal { 
+  font-size: 10px;
+  padding: 3px;
+  width: 20px;
+}

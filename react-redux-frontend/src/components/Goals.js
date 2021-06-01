@@ -21,15 +21,15 @@ class Goals extends Component {
         
         let goalList = incompleteGoals.map(goal => {
             return (
-            <div>
-                <div className="progress" key={goal.id}>
-                    <div className="progress-bar" role="progress-bar" style={{width: `${goal.paid/goal.price * 100}%`}} area-valuenow={`${goal.paid/goal.price * 100}`} area-valuemin={"0"} area-valuemax="100">
-                        {goal.name} - Price: {goal.price} - Amount Paid: {goal.paid}
+                <div>
+                    <div className="progress" key={goal.id}>
+                        <div className="progress-bar" role="progress-bar" style={{width: `${goal.paid/goal.price * 100}%`}} area-valuenow={`${goal.paid/goal.price * 100}`} area-valuemin={"0"} area-valuemax="100">
+                            {goal.name} - Price: {goal.price} - Amount Paid: {goal.paid}
+                        </div>
                     </div>
+                    <button className="btn btn-danger" id="delete-goal" onClick={() => this.handleDelete(goal)}> X </button>
                 </div>
-                <button onClick={() => this.handleDelete(goal)}> X </button>
-            </div>
-            )
+                )
         }); 
 
             return (
